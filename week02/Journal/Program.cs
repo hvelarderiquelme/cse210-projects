@@ -7,8 +7,10 @@ class Program
     {
         int choice;
         string strChoice;
+        Journal journal = new Journal();
+        PromptGenerator prompt = new PromptGenerator();
+
         //Shows menu and asks what to do
-        
         do{
             Console.WriteLine("Welcome to your journal. These are the menu options:");
             Console.WriteLine($"1-Add entry.");
@@ -16,35 +18,29 @@ class Program
             Console.WriteLine($"3-Save your journal.");
             Console.WriteLine($"4-Load your journal.");
             Console.WriteLine($"5-Quit.");
-            Console.WriteLine($"What would youlike to do?");
+            Console.WriteLine($"What would you like to do?");
             strChoice = Console.ReadLine();
             choice = int.Parse(strChoice);
 
             if (choice == 1){
-                PromptGenerator prompt = new PromptGenerator();
-                prompt.prompt();
-                Journal add = new Journal();
-                add.AddEntry();
+                prompt.Prompt();
             }  
 
             if (choice == 2){
-                Journal display = new Journal();
-                display.DisplayJournal();
+                journal.DisplayJournal();
+                
             }
 
             if (choice == 3){
-                Journal save = new Journal();
-                save.SaveJournal();
+                journal.SaveJournal();
             }
 
             if (choice == 4){
-                Journal load = new Journal();
-                load.LoadJournal();
+                journal.LoadJournal();
             }
             
 
         }while (choice < 5);
 
-        Console.WriteLine($"{choice}");
-    }
-}
+    }//main function
+}//class program
