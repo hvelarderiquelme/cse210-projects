@@ -1,5 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
+using System.IO; 
 
 class Program
 {
@@ -9,7 +11,7 @@ class Program
         string strChoice;
         Journal journal = new Journal();
         PromptGenerator prompt = new PromptGenerator();
-
+        
         //Shows menu and asks what to do
         do{
             Console.WriteLine("Welcome to your journal. These are the menu options:");
@@ -19,16 +21,17 @@ class Program
             Console.WriteLine($"4-Load your journal.");
             Console.WriteLine($"5-Quit.");
             Console.WriteLine($"What would you like to do?");
+            Console.Write(">");
             strChoice = Console.ReadLine();
             choice = int.Parse(strChoice);
 
             if (choice == 1){
                 prompt.Prompt();
+                
             }  
 
             if (choice == 2){
-                journal.DisplayJournal();
-                
+                journal.DisplayJournal();            
             }
 
             if (choice == 3){

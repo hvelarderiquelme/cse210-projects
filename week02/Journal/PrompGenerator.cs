@@ -16,13 +16,14 @@ public class PromptGenerator
         _prompts.Add("How did I see the hand of the Lord in my life today?");
         _prompts.Add("What was the strongest emotion I felt today?");
         _prompts.Add("If I had one thing I could do over today, what would it be?");
+        _prompts.Add("Did you have the opportunity to follow a prompting fron the Holy ghost today?");
         
         Random rnd = new Random();
         int index = rnd.Next(_prompts.Count);
-
+        
         Console.WriteLine(_prompts[index]);
         _entry = Console.ReadLine();
-        journal.AddEntry(_entry);
+        journal.AddEntry(_prompts[index],_entry);
         
     }//end Prompt method
 }//end class declaration
