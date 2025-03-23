@@ -10,7 +10,7 @@ public class Fractions
         _denominator = "1";
         
     }
-    //Constructor with no denpminator, example _numerator:5, it will create 5/1 
+    //Constructor with no denominator, example _numerator:5, it will create 5/1 
     public Fractions(string numerator)
     {
         _numerator = numerator;
