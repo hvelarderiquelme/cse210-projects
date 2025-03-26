@@ -6,7 +6,8 @@ public class Scripture{
     private List<Word> _words = new List<Word>();
     private string _text;//not for use just to finish method declaration
     private bool _is;//not for use just to finish method declaration
-    
+    //private List<int> _indexes = new List<int>();
+
     //class constructor
     public Scripture(Reference reference, string text){
        
@@ -14,7 +15,7 @@ public class Scripture{
         _text = text;
         string[] words = text.Split();
         for(int i=0;i<words.Length;i++){
-            _words.Add(new Word(words[i]));
+            _words.Add(new Word(words[i], false));
         }
 
     }
@@ -22,38 +23,51 @@ public class Scripture{
     public void HideRandomWords(int numberToHide){
             
             Random rnd = new Random();
-            int index = rnd.Next(_words.Count); 
-            string hiddenWord = "";
-            string words = "";
+            int index;
             
-
-            foreach(var word in _words){
-                                
-                if (word == _words[index]){
-                    
-                    for( int i = 0; i < word.GetDisplayString().Length; i++){
-                        
-                        hiddenWord += "_";      
-                    }
-
-                    words += $"{hiddenWord} ";
-                    hiddenWord ="";
-                }
-
-                else{
-
-                    words += $"{word.GetDisplayString().ToString()} ";    
-                    
-                }
-                
+            for(int i=0; i<3;i++){
+                index = rnd.Next(0,_words.Count);
+                Console.WriteLine(index);
+                _words[index].Hide();
+                _words[24].Show();
             }
             
+            // if (!_indexes.Contains(index)){
+            //     _indexes.Add(index);
+            // }
+            // foreach(var Index in _indexes){
+            //     Console.WriteLine(Index);
+            // }
+            
+            //if(_indexes.Contains(index)){
+                //foreach(var word in _words){
 
-            Console.WriteLine($"{_reference.GetDisplayText()} {words}");
+                    //if ((word == _words[index]) && (word.IsHidden() == false)){
+                           
+                       
+        
+                    //}
+
+                    //else{
+                        
+                       
+                        
+                    //}
+                
+                
+                //}
+            //}
+
+            Console.WriteLine();
+            
     }
     public string GetDisplayText(){
-                
+        string strScripture = "";
+         foreach(var word in _words){
+            strScripture += _words.ToString();
+         }       
         return $"{_reference.GetDisplayText()}: {_text}";
+
     }
 
     public bool IsCompletelyHidden(){
