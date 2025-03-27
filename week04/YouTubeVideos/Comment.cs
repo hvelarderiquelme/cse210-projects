@@ -6,11 +6,16 @@ public class Comment{
     private string _comment;
 
     //Constructor
-    Comment(string name, string comment){
+    public Comment(string name, string comment){
         _name = name;
         _comment = comment;
     }
 
     //Methods
+    public string GetComments(){
+        string nameComment = $"{_name} {_comment}";
+        return nameComment;
+
+    }
     
 }//end of class declaration
