@@ -22,11 +22,13 @@ public class Video{
     //Methods
     public void NumberOfComments(){
         Console.WriteLine($"Video name:{_title}, made by: {_author}, {_length}s long, {_comments.Count} comments:");
+        Console.WriteLine();
         string strComments;
         
         foreach(var comment in _comments){
             strComments = comment.GetComments();
             Console.WriteLine(strComments);
+            //Console.WriteLine();
         }
         
         

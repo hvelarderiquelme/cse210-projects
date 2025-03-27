@@ -13,7 +13,7 @@ public class Comment{
 
     //Methods
     public string GetComments(){
-        string nameComment = $"{_name} {_comment}";
+        string nameComment = $"{_name}: {_comment}";
         return nameComment;
 
     }
