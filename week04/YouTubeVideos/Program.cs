@@ -19,9 +19,9 @@ class Program
         Comment comment12 = new Comment("Valerie Duncan", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio blanditiis ex eaque impedit repudiandae dolore.");
         
 
-        videos.Add(new Video("Sunrise", "Carlos Benavides", 44.32,[comment1,comment2,comment3,comment4,comment5]));
-        videos.Add(new Video("Dance", "Raul Gutierrez", 123.99,[comment6,comment7,comment8]));
-        videos.Add(new Video("Cooking", "Mariana Riquelme", 75,[comment9,comment10,comment11,comment12]));
+        videos.Add(new Video("Sunrise in Mexico", "Carlos Benavides", 44.32,[comment1,comment2,comment3,comment4,comment5]));
+        videos.Add(new Video("Dance with the moon", "Raul Gutierrez", 123.99,[comment6,comment7,comment8]));
+        videos.Add(new Video("Cooking for your soul", "Mariana Riquelme", 75,[comment9,comment10,comment11,comment12]));
 
         
         foreach(var video in videos){

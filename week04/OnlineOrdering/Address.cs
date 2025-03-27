@@ -4,24 +4,30 @@ public class Address{
     private string _streetName;
     private string _streetNumber;
     private string _city;
-    private string _state;
+    private string _stateOrProvince;
     private string _country;
 
     //Constructor
-    public Address(string streetName, string streetNumber, string city, string state, string country){
+    public Address(string streetNumber, string streetName, string city, string stateOrProvince, string country){
         _streetName = streetName;
         _streetNumber = streetNumber;
         _city = city;
-        _state = state;
+        _stateOrProvince = stateOrProvince;
         _country = country;
     }
 
     //Methods
     public string GetAddress(){
-        return "Address";
+        string address = $"{_streetNumber} {_streetName}, {_city}, {_stateOrProvince}, {_country}.";
+        return address;
     }
 
-    public bool IsUsAddress(){
-        return true;
+    public bool IsUSAddress(){
+        if (_country == "USA"){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
