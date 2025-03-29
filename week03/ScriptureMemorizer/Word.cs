@@ -2,8 +2,7 @@
 public class Word{
     private string _text;
     private bool _isHidden;
-    //private string displayMemorizerText="";
-
+    private string _values="";
     //Constructor
     public Word(string text, bool isHidden){
         _text = text;
@@ -20,23 +19,23 @@ public class Word{
 
         _text = undereScore;
         _isHidden = true;
-        //displayMemorizerText += undereScore;
-        Console.Write(_text);
               
     }
 
     public void Show(){
        
-        Console.Write(_text);
+       // _isHidden = false;
 
     }
     public bool IsHidden(){   
         return _isHidden;
     }
 
-    // public string GetDisplayString(){
+    public string GetDisplayString(){
         
-    //     return displayMemorizerText;
+        return _text + " ";
 
-    // }
+    }
+
+    
 }//end of class declaration
