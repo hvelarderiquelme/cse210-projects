@@ -35,7 +35,7 @@ public class Activity{
 
         public void DisplayDelay(){
         DateTime startTime = DateTime.Now;
-        DateTime endTime = startTime.AddSeconds(8);
+        DateTime endTime = startTime.AddSeconds(6);
         string[] animation={"-","\\","|","/","-","\\","|","/"};
         int i = 0;
         

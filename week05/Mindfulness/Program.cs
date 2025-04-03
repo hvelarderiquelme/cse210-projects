@@ -10,10 +10,13 @@ class Program
       string description;
       List<string> prompts = new List<string>();
       List<string> questions = new List<string>();
+      List<string> listOfPrompts = new List<string>();
+
       prompts.Add("Think of a time when you stood up for someone else.");
       prompts.Add("Think of a time when you did something really difficult.");
       prompts.Add("Think of a time when you helped someone in need.");
       prompts.Add("Think of a time when you did something truly selfless.");
+
       questions.Add("Why was this experience meaningful to you?");
       questions.Add("Have you ever done anything like this before?");
       questions.Add("How did you get started?");
@@ -22,6 +25,12 @@ class Program
       questions.Add("What could you learn from this experience that applies to other situations?");
       questions.Add("What did you learn about yourself through this experience?");
       questions.Add("How can you keep this experience in mind in the future?");
+
+      listOfPrompts.Add("Who are the people that you appreciate?");
+      listOfPrompts.Add("What are personal strengths of yours?");
+      listOfPrompts.Add("Who are the people that you have helped this week?");
+      listOfPrompts.Add("When have you felt the HOly Ghost this month?");
+      listOfPrompts.Add("Who are some of your personal heroes?");
     
     
 
@@ -55,6 +64,16 @@ class Program
             int duration = int.Parse(Console.ReadLine());
             ReflectingActivity reflectingActivity = new ReflectingActivity(name,description,duration,prompts,questions);
             reflectingActivity.ReflectingExercise();    
+        }
+        else if (numOption == 3){
+            name = "Listing Activity";
+            description = "This activity will help you reflect on the good things in tuor life by having you list as many things as you can ina certain area for a period of time.";
+            Activity activity = new(name,description);
+            activity.DisplaygreetingMessage();
+            Console.Write($"\nFor how long(in seconds) would you like to do this activity? ");
+            int duration = int.Parse(Console.ReadLine());
+            ListingActivity listingActivity= new ListingActivity(name,description,duration,listOfPrompts);
+            listingActivity.ListingExercise();   
         }
 
       }

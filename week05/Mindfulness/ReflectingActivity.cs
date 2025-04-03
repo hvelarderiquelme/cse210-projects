@@ -14,7 +14,6 @@ public class ReflectingActivity : Activity{
     //methods
     public void ReflectingExercise(){
         
-        
         Console.Clear();
         Console.WriteLine("Let's get ready...");
         DisplayDelay();
