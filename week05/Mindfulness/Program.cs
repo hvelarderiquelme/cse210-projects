@@ -29,7 +29,7 @@ class Program
       listOfPrompts.Add("Who are the people that you appreciate?");
       listOfPrompts.Add("What are personal strengths of yours?");
       listOfPrompts.Add("Who are the people that you have helped this week?");
-      listOfPrompts.Add("When have you felt the HOly Ghost this month?");
+      listOfPrompts.Add("When have you felt the Holy Ghost this month?");
       listOfPrompts.Add("Who are some of your personal heroes?");
     
     
