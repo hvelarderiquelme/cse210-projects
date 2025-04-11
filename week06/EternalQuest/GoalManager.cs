@@ -4,26 +4,26 @@ using System.Runtime.Serialization;
 public class GoalManager{
     private List<Goal> _goals = new List<Goal>();
     private int _score;
-
-    //constructors
+    private int totalPoints=0;
+    
+    //constructor
+    
     public GoalManager(){
         _score = 0;
-    }
-    public GoalManager(List<Goal> goals, int score){
-        _goals = goals;
-        _score = score;
     }
 
     //methods
     public void Start(){
-        string strChoice="";
+        
+        string strChoice;
         int intChoice = 0;
+        bool completedOneGoal = false;
 
         Console.Clear();
         Console.WriteLine("Welcome to the Goals program! What would you like to do?");
         Console.WriteLine();
-        Console.WriteLine($"You have {_score} points");
-        Console.WriteLine();
+        Console.WriteLine($"You have {_score} points.");
+        
 
         while(intChoice < 6){
             
@@ -42,9 +42,18 @@ public class GoalManager{
 
                 case 1:
                     CreateGoal();
+                    if(completedOneGoal == false){
+                        Console.WriteLine($"\nYou have 0 points.");
+                    }
+                    // else{
+                    //     TotalPoints();
+                    // }
                     break;
                 case 2:
-                    ListGoalNames();
+                    ListGoalDetails();
+                    if(completedOneGoal == false){
+                        Console.WriteLine($"\nYou have 0 points.");
+                    }
                     break;
                 case 3:
                     Console.WriteLine("three");
@@ -53,7 +62,8 @@ public class GoalManager{
                     Console.WriteLine("four");
                     break;
                 case 5:
-                    Console.WriteLine("five");
+                    ListGoalNames();
+                    completedOneGoal=true;
                     break;
 
             }//end of switch statement
@@ -66,15 +76,27 @@ public class GoalManager{
     }
 
     public void ListGoalNames(){
+        
+        int i=1;
+
         Console.WriteLine();
-        Console.WriteLine("These are your goals:");
+        Console.WriteLine("The goals are:");
         foreach(var goal in _goals){
-            Console.WriteLine(goal.GetDetailsString());
+            Console.WriteLine($"{i++}. {goal.GetName()}.");
         }
-        Console.WriteLine();
-    }
+        
+        RecordEvent();
+}
 
     public void ListGoalDetails(){
+
+       int i=1;
+        Console.WriteLine();
+        Console.WriteLine("The goals are:");
+        foreach(var goal in _goals){
+            Console.WriteLine($"{i++}. [ ] {goal.GetDetailsString()}).");
+        }
+        Console.WriteLine();
 
     }
 
@@ -84,6 +106,8 @@ public class GoalManager{
         string shortName;
         string description;
         string points;
+        string strAmountCompleted;
+        string strBonus;
 
         Console.WriteLine();
         Console.WriteLine("Types of goals:");
@@ -104,7 +128,8 @@ public class GoalManager{
             points = Console.ReadLine();
 
             SimpleGoal simpleGoal = new(shortName,description,points);
-            _goals.Add(simpleGoal); 
+            _goals.Add(simpleGoal);
+             
         }
         else if(intGoalType == 2){
             Console.Write("What is the name of your goal? ");
@@ -118,14 +143,39 @@ public class GoalManager{
             _goals.Add(eternalGoal);
         }
         else if(intGoalType == 3){
-            Console.WriteLine(intGoalType);
+            Console.Write("What is the name of your goal? ");
+            shortName = Console.ReadLine();
+            Console.Write("Please describe the goal: ");
+            description = Console.ReadLine();   
+            Console.Write("How many points do you want to give yourself for this goal? ");
+            points = Console.ReadLine();
+            Console.Write("How many times does this goal to be done to be considered completed? ");
+            strAmountCompleted = Console.ReadLine();
+            Console.Write("What is the bonus points added to this goal when it is completed? " );
+            strBonus = Console.ReadLine();
+
+            ChecklistGoal checklistGoal = new(shortName,description,points,int.Parse(strAmountCompleted),int.Parse(strBonus));
+            _goals.Add(checklistGoal);
+           
         }
 
 
     }
 
     public void RecordEvent(){
-
+        string strGoalNumber;
+        // int sumScore;
+        
+        Console.Write($"\nWhich goal did you accomplished? ");
+        strGoalNumber = Console.ReadLine();
+        _goals[int.Parse(strGoalNumber)-1].RecordEvent();
+        _score = _goals[int.Parse(strGoalNumber)-1].NewScore();
+        // sumScore = _score;
+        Console.WriteLine($"_score={_score}");
+        // Console.WriteLine($"SUMsCORE={sumScore}");
+        TotalPoints(_score);
+        
+        
     }
 
     public void SaveGoals(){
@@ -134,6 +184,13 @@ public class GoalManager{
 
     public void LoadGoals(){
 
+    }
+
+    public void TotalPoints(int sumScore){
+        
+            totalPoints += sumScore;
+        
+        Console.WriteLine($"Your have {totalPoints} total points.");
     }
 
 }//end of Class declaration

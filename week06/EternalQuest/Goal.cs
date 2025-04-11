@@ -1,8 +1,11 @@
 //Base Class Goal
 public abstract class Goal{
-    private string _shortName;
-    private string _description;
-    private string _points;
+    protected string _shortName;
+    protected string _description;
+    protected string _points;
+
+    protected int newScore;
+    
 
     //Constructor
     public Goal(string shortName, string description, string points){
@@ -18,4 +21,14 @@ public abstract class Goal{
     public abstract bool IsComplete();
     
     public abstract string GetStringRepresentation();
+
+    public abstract int NewScore();
+
+    public string GetName(){
+        return _shortName;
+    }
+
+    public int GetPoints(){
+        return int.Parse(_points);
+    }
 }// end of class declaration

@@ -12,12 +12,12 @@ public class ChecklistGoal:Goal{
 
     public override void RecordEvent()
     {
-        
+        Console.WriteLine($"Congratulations! You have earned {GetPoints()} points!\n");
     }
 
     public override bool IsComplete()
     {
-        return true;
+        return false;
     }
 
     public override string GetStringRepresentation()
@@ -26,6 +26,15 @@ public class ChecklistGoal:Goal{
     }
 
     public override string GetDetailsString(){
-        return "yes";
+        return $"{_shortName} ({_description}).";
     }
+
+    public override int NewScore(){
+        int score;
+        score = int.Parse(_points);
+        
+        //Console.WriteLine($"You have {score} points for this goal.");
+        
+        return score;
+        }
 }//end of class declaration
