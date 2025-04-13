@@ -1,8 +1,12 @@
 //Derived class ChecklistGoal
+using System.Threading.Channels;
+
 public class ChecklistGoal:Goal{
     private int _amountCompleted;
     private int _target;
     private int _bonus;
+
+    private int _scorePlusBonus;
 
     //constructor
     public ChecklistGoal(string shortName, string description, string points, int target, int bonus):base(shortName,description,points){
@@ -13,28 +17,52 @@ public class ChecklistGoal:Goal{
     public override void RecordEvent()
     {
         Console.WriteLine($"Congratulations! You have earned {GetPoints()} points!\n");
+        TotalScorePerGoal();
+        _amountCompleted++; 
     }
 
     public override bool IsComplete()
     {
-        return false;
+        if(_amountCompleted == _target){       
+            return true;
+        }
+        else{
+            return false;
+        }    
     }
 
     public override string GetStringRepresentation()
     {
-        return "yes";
+         string row;
+        row = $"{_shortName},{_description},{_points},{_target},{_bonus}";
+        return row; 
     }
 
     public override string GetDetailsString(){
-        return $"{_shortName} ({_description}).";
+        if(_amountCompleted == _target){
+
+            return $"{_shortName} ({_description}). You have completed {_amountCompleted}/{_target} times for this goal. Great job! You've earned {_bonus} extra points!";
+        }
+        else{       
+            return $"{_shortName} ({_description}). You have {_amountCompleted}/{_target} times for this goal. Keep going!";
+        }    
     }
 
-    public override int NewScore(){
+    public int GetBonus(){
+        return _bonus;
+    }
+
+    public override int TotalScore(){
         int score;
-        score = int.Parse(_points);
-        
-        //Console.WriteLine($"You have {score} points for this goal.");
-        
-        return score;
+        if(IsComplete()==true){
+            score = int.Parse(_points) + _bonus;
+            Console.WriteLine($"Congratulations! You have won {_bonus} extra points!");
         }
+        else{
+            score = int.Parse(_points);
+        }
+        
+        return score;   
+    }
+
 }//end of class declaration

@@ -4,7 +4,7 @@ public abstract class Goal{
     protected string _description;
     protected string _points;
 
-    protected int newScore;
+    protected int _goalScore;
     
 
     //Constructor
@@ -19,10 +19,17 @@ public abstract class Goal{
     }
     public abstract void RecordEvent();
     public abstract bool IsComplete();
+    public abstract int TotalScore(); 
     
     public abstract string GetStringRepresentation();
-
-    public abstract int NewScore();
+    //****************************************Creativity. This methos keep strack of teh individual goal score*****************************//
+    public void TotalScorePerGoal(){
+        
+        _goalScore += int.Parse(_points);
+        Console.WriteLine($"You have {_goalScore} points for this goal.");
+        
+    }
+    //*************************************************************************************************************************************//
 
     public string GetName(){
         return _shortName;
@@ -31,4 +38,6 @@ public abstract class Goal{
     public int GetPoints(){
         return int.Parse(_points);
     }
+
+    
 }// end of class declaration

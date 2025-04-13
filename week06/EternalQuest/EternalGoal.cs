@@ -7,30 +7,28 @@ public class EternalGoal:Goal{
     public override void RecordEvent()
     {
         Console.WriteLine($"Congratulations! You have earned {GetPoints()} points!\n");
+        TotalScorePerGoal();
     }
 
     public override bool IsComplete()
     {
             
-            return true;
+            return false;
         
     }
 
     public override string GetStringRepresentation()
     {
-        return "yes";
+         string row;
+        row = $"{_shortName},{_description},{_points}";
+        return row; 
     }
 
-    public override int NewScore(){
-        int score;
-        score = int.Parse(_points);
-        
-        //Console.WriteLine($"You have {score} points for this goal.");
-        
-        return score;
+    public override int TotalScore(){
+            int score;
 
-        
-    }
-
+            score = int.Parse(_points);
+            return score;   
+        }
     
 }//end of class declaration

@@ -1,6 +1,6 @@
 //Derived Class SimpleGoal
 public class SimpleGoal : Goal{
-    private bool _isComplete;
+    private bool _isComplete=false;
     
     //constructor
     public SimpleGoal(string shortName, string description, string points):base(shortName,description,points){}
@@ -8,25 +8,29 @@ public class SimpleGoal : Goal{
     public override void RecordEvent()
     {
         Console.WriteLine($"Congratulations! You have earned {GetPoints()} points!\n");
+        TotalScorePerGoal();
+        _isComplete = true;
+        
 
     }
 
     public override bool IsComplete()
     {
-        return false;
+        return _isComplete;
     }
 
     public override string GetStringRepresentation()
     {
-        return "yes";   
+        string row;
+        row = $"{_shortName},{_description},{_points},{_isComplete}";
+        return row;   
     }
 
-    public override int NewScore(){
+    public override int TotalScore(){
         int score;
+
         score = int.Parse(_points);
-        
-        //Console.WriteLine($"You have {score} points for this goal.\n");
-        
         return score;   
     }
+
 }//end of Class declaration
