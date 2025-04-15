@@ -204,31 +204,36 @@ public class GoalManager{
     }
 
     public void LoadGoals(){
-        // string filename;
+        string filename;
+        string[] goals;
+        string[] objectAndAttributes;
+        string strObject;
+        string strAttributes;
+        string[] splitAttributes; 
        
-        // Console.Write("Please enter the name of the file to load: ");
-        // filename = Console.ReadLine();
+        Console.Write("Please enter the name of the file to load: ");
+        filename = Console.ReadLine();
+        goals = System.IO.File.ReadAllLines(filename);
         
-        // string[] goals = System.IO.File.ReadAllLines(filename);
-        // Console.WriteLine(goals[0]);
-        // _totalPoints = int.Parse(goals[0]);
+        Console.WriteLine($"first row: {goals[0]}");
+        _totalPoints = int.Parse(goals[0]);
         
-        // for(int i=1; i < goals.Length; i++)
-        // {
-        //    Console.WriteLine(goals[1]);
-        //    string[] objectAndAttributes = goals[1].Split(":");
+        for(int i=1; i < goals.Length; i++)
+        {
+           Console.WriteLine($"Next row: {goals[i]}");
+           objectAndAttributes = goals[i].Split(":");
+           strObject = objectAndAttributes[0];
+           strAttributes = objectAndAttributes[1];
+           Console.WriteLine($"Goal type: {strObject}");
+           Console.WriteLine($"Goal attributes: {strAttributes}");
+           splitAttributes = strAttributes.Split(",");
            
-           
-        //    string strAttributes = objectAndAttributes[1];
-        //    Console.WriteLine(strAttributes);
-        //    string[] splitAttributes = strAttributes.Split(",");
-           
-        //    for (int n = 0; n < splitAttributes.Length; n++){
-        //         Console.WriteLine(splitAttributes[n]);
-        //         objectAndAttributes.ToList().Add(splitAttributes[n]);
-        //    }
-        
-        // }
+           for (int n = 0; n < splitAttributes.Length; n++){
+                
+                Console.WriteLine($"Atribute: {splitAttributes[n]}");
+           }
+            Console.WriteLine();
+        }
     }
 
     public void TotalPoints(int sumScore){
