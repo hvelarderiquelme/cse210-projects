@@ -1,9 +1,11 @@
 //Derived Class SimpleGoal
 public class SimpleGoal : Goal{
-    private bool _isComplete=false;
+    private bool _isComplete;
     
     //constructor
-    public SimpleGoal(string shortName, string description, string points):base(shortName,description,points){}
+    public SimpleGoal(string shortName, string description, string points, bool isComplete):base(shortName,description,points){
+        _isComplete = isComplete;
+    }
 
     public override void RecordEvent()
     {
@@ -16,7 +18,12 @@ public class SimpleGoal : Goal{
 
     public override bool IsComplete()
     {
-        return _isComplete;
+        
+        if (_isComplete == true)
+             return true;
+         else{
+            return false;
+         }    
     }
 
     public override string GetStringRepresentation()

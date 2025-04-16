@@ -42,21 +42,27 @@ public class GoalManager{
 
                 case 1:
                     CreateGoal();
-                    if(completedOneGoal == false){
+                    if(_totalPoints == 0){
                         Console.WriteLine($"\nYou have 0 points.");
                     }
-                    else{
-                        TotalPoints(0);
+                    else if(_totalPoints>0){
+                        TotalPoints(0);    
                     }
+                    // else{
+                    //     TotalPoints(0);
+                    // }
                     break;
                 case 2:
                     ListGoalDetails();
-                    if(completedOneGoal == false){
+                    if(_totalPoints == 0 ){
                         Console.WriteLine($"\nYou have 0 points.");
                     }
-                    else{
-                        TotalPoints(0);
+                    else if(_totalPoints>0){
+                        TotalPoints(0);    
                     }
+                    // else{
+                    //     TotalPoints(0);
+                    // }
                     break;
                 case 3:
                     SaveGoals();
@@ -98,6 +104,7 @@ public class GoalManager{
         Console.WriteLine();
         Console.WriteLine("The goals are:");
         foreach(var goal in _goals){
+            
             complete = goal.IsComplete();
             
             if(complete == true){
@@ -138,7 +145,7 @@ public class GoalManager{
             Console.Write("How many points do you want to give yourself for this goal? ");
             points = Console.ReadLine();
 
-            SimpleGoal simpleGoal = new(shortName,description,points);
+            SimpleGoal simpleGoal = new(shortName,description,points,false);
             _goals.Add(simpleGoal);
              
         }
@@ -165,7 +172,7 @@ public class GoalManager{
             Console.Write("What is the bonus points added to this goal when it is completed? " );
             strBonus = Console.ReadLine();
 
-            ChecklistGoal checklistGoal = new(shortName,description,points,int.Parse(strAmountCompleted),int.Parse(strBonus));
+            ChecklistGoal checklistGoal = new(shortName,description,points,int.Parse(strAmountCompleted),int.Parse(strBonus), 0, false);
             _goals.Add(checklistGoal);
            
         }
@@ -214,23 +221,43 @@ public class GoalManager{
         Console.Write("Please enter the name of the file to load: ");
         filename = Console.ReadLine();
         goals = System.IO.File.ReadAllLines(filename);
-        
-        Console.WriteLine($"first row: {goals[0]}");
         _totalPoints = int.Parse(goals[0]);
         
         for(int i=1; i < goals.Length; i++)
         {
-           Console.WriteLine($"Next row: {goals[i]}");
            objectAndAttributes = goals[i].Split(":");
            strObject = objectAndAttributes[0];
            strAttributes = objectAndAttributes[1];
-           Console.WriteLine($"Goal type: {strObject}");
-           Console.WriteLine($"Goal attributes: {strAttributes}");
            splitAttributes = strAttributes.Split(",");
-           
-           for (int n = 0; n < splitAttributes.Length; n++){
-                
-                Console.WriteLine($"Atribute: {splitAttributes[n]}");
+
+           if(strObject == "SimpleGoal"){
+              string shortName = splitAttributes[0];
+              string description = splitAttributes[1];
+              string points = splitAttributes[2];
+              string completed = splitAttributes[3];
+
+              Goal newGoal = new SimpleGoal(shortName, description, points, bool.Parse(completed));
+              _goals.Add(newGoal);
+           }
+           if(strObject == "EternalGoal"){
+                string shortName = splitAttributes[0];
+                string description = splitAttributes[1];
+                string points = splitAttributes[2];
+
+                Goal newGoal = new EternalGoal(shortName, description, points);
+                _goals.Add(newGoal);
+           }
+           if(strObject == "ChecklistGoal"){
+                string shortName = splitAttributes[0];
+                string description = splitAttributes[1];
+                string points = splitAttributes[2];
+                int target = int.Parse(splitAttributes[3]);
+                int bonus = int.Parse(splitAttributes[4]);
+                string amountCompleted = splitAttributes[5];
+                string completed = splitAttributes[6];
+
+                Goal newGoal = new ChecklistGoal(shortName, description, points, target, bonus, int.Parse(amountCompleted), bool.Parse(completed));
+                 _goals.Add(newGoal);
            }
             Console.WriteLine();
         }
@@ -241,11 +268,6 @@ public class GoalManager{
             _totalPoints += sumScore;
         
         Console.WriteLine($"You have {_totalPoints} total points.");
-    }
-
-    public void ReadGoal(){
-        
-        Console.WriteLine("Hi");
     }
 
 }//end of Class declaration
